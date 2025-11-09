@@ -743,12 +743,9 @@ df3.plot()
 ```
 
 ```{code-cell} ipython3
-for p in pays_3:
-    plt.plot(df3.loc[(p)], label=p)
-plt.legend()
+df3.unstack(level=0).plot() # unstack(level=0) pour éviter le multi-index
 plt.grid(True)
 plt.show()
-# toujours bof mais mieux
 ```
 
 ### fonction d'extraction
@@ -777,12 +774,14 @@ def extract(pays, mesures, debut, fin):
 en utilisant cette fonction, plottez sur un même graphique les données de deux pays
 
 ```{code-cell} ipython3
-df2 = extract(['France', 'Germany'], ['deaths', 'confirmed'], '21-10-01', '22-10-01')
+df2 = extract(['France', 'Germany'], ['deaths', 'confirmed'], '2021-10-01', '2022-10-01')
+# erreur commise : pas écriture année complète
 ```
 
 ```{code-cell} ipython3
-plt.plot(df2)
-# ça marche pas je comprends pas
+df2.unstack(level=0).plot()
+plt.grid(True)
+plt.show()
 ```
 
 ## proposez des analyses personnelles sur ces données
